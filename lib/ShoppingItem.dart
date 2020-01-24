@@ -33,12 +33,16 @@ class _ShoppingItemState extends State<ShoppingItem> {
                   callback(CartItem(name: widget.item.name, checked: value));
                 });
               }),
-//              trailing: new StoreConnector<List<CartItem>, OnItemDeleted>(
-//                converter: (store)=>(item)=>store.dispatch(DeleteItemAction(widget.item)),
-//                  builder: (context, callback)=>new IconButton(
-//                      icon: new Icon(Icons.delete),
-//                      onPressed: callback(widget.item.name))
-//              ),
+              trailing: new StoreConnector<List<CartItem>, OnItemDeleted>(
+                converter: (store)=>(item)=>store.dispatch(DeleteItemAction(widget.item)),
+                  builder: (context, callback)=>new IconButton(
+                      icon: new Icon(Icons.delete),
+                      onPressed: (){
+                        setState(() {
+                          callback(widget.item.name);
+                        });
+                      })
+              ),
             ),
           )
       ),
